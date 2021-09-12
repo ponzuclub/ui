@@ -4,6 +4,7 @@ import { useWeb3React } from '@web3-react/core';
 import { injected } from '../connectors';
 import { addArbitrumRPC } from '../hooks';
 import EthCard from '../components/EthCard';
+import PonzuCard from '../components/PonzuCard';
 
 function Home() {
   const { active, account, chainId, library, connector, activate } = useWeb3React()
@@ -38,31 +39,7 @@ function Home() {
         </Row>
         <Row>
           <Col>
-            <Card>
-              <Card.Header as="h5">Farm</Card.Header>
-              <Card.Body>
-                <Card.Title>PONZU Pool</Card.Title>
-                <Card.Text>
-                  APR:
-                </Card.Text>
-                <Row>
-                  <Col>
-                    <Button variant="warning">Approve</Button>
-                  </Col>
-                  <Col>
-                    <Button variant="primary">Stake</Button>
-                  </Col>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <Button variant="success">Max</Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <PonzuCard />
           </Col>
         </Row>
         <Row>

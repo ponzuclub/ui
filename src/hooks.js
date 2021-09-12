@@ -4,6 +4,8 @@ import { Contract } from "@ethersproject/contracts";
 import { useWeb3React } from "@web3-react/core";
 
 import NyanRewards_ABI from "./abis/NyanRewards.json";
+import PonzuToken_ABI from "./abis/PonzuToken.json";
+import ERC20_ABI from "./abis/ERC20.json";
 
 export function useNyanRewards(address, withSigner = false) {
   const { library, account, chainId } = useWeb3React();
@@ -12,6 +14,32 @@ export function useNyanRewards(address, withSigner = false) {
       new Contract(
         address,
         NyanRewards_ABI,
+        withSigner ? library?.getSigner(account).connectUnchecked() : library
+      ),
+      [withSigner, library, account]
+  );
+}
+
+export function usePonzu(withSigner = false) {
+  const { library, account, chainId } = useWeb3React();
+  return useMemo(
+    () =>
+      new Contract(
+        "0x7d2D35cF256cb47b8cAa6eB4d793f1c7e2228d35",
+        PonzuToken_ABI,
+        withSigner ? library?.getSigner(account).connectUnchecked() : library
+      ),
+      [withSigner, library, account]
+  );
+}
+
+export function useERC20(address, withSigner = false) {
+  const { library, account, chainId } = useWeb3React();
+  return useMemo(
+    () =>
+      new Contract(
+        address,
+        ERC20_ABI,
         withSigner ? library?.getSigner(account).connectUnchecked() : library
       ),
       [withSigner, library, account]
