@@ -19,11 +19,13 @@ function PonzuCard() {
   const [ponzuValue, setPonzuValue] = useState("0");
   const [staked, setStaked] = useState("0");
   const [earned, setEarned] = useState("0");
+  const [apr, setApr] = useState(0);
   const ponzu = usePonzu(library ? true : false);
   const rewards = useNyanRewards(
     "0xF6a37745FC911666132E8b8F29fC9c4F5C4a703D",
     library ? true : false
   );
+
 
   useEffect(() => {
     if (library) {
@@ -35,6 +37,12 @@ function PonzuCard() {
       });
       rewards.earned(account).then((res) => {
         setEarned(ethers.utils.formatEther(res));
+      });
+
+      rewards.rewardRate().then((rewardRate) => {
+        rewards.totalSupply().then((totalSupply) => {
+          setApr(100*parseFloat(ethers.utils.formatEther(rewardRate)) * 31557600 / parseFloat(ethers.utils.formatEther(totalSupply)));
+        });
       });
     }
   }, [library]);
@@ -124,7 +132,7 @@ function PonzuCard() {
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
         <Card.Title>Ponzu Pool</Card.Title>
-        <Card.Text>APR:</Card.Text>
+        <Card.Text>APR: {apr}%</Card.Text>
         <Card.Text>Staked: {staked} Ponzu</Card.Text>
         <Card.Text>Earned: {earned} Ponzu</Card.Text>
 

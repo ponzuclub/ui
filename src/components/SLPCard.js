@@ -20,6 +20,7 @@ function SLPCard(props) {
   const [slpValue, setSlpValue] = useState("0");
   const [staked, setStaked] = useState("0");
   const [earned, setEarned] = useState("0");
+  const [apr, setApr] = useState(0);
   const slp = useERC20(slpTokenAddress, library ? true : false);
   const ponzu = usePonzu(library ? true : false);
   const rewards = useNyanRewards(poolAddress, library ? true : false);
@@ -34,6 +35,11 @@ function SLPCard(props) {
       });
       rewards.earned(account).then((res) => {
         setEarned(ethers.utils.formatEther(res));
+      });
+      rewards.rewardRate().then((rewardRate) => {
+        rewards.totalSupply().then((totalSupply) => {
+          setApr(100*parseFloat(ethers.utils.formatEther(rewardRate)) * 31557600 / parseFloat(ethers.utils.formatEther(totalSupply)));
+        });
       });
     }
   }, [library]);
@@ -122,7 +128,7 @@ function SLPCard(props) {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text><a href={link}>{linkText}</a></Card.Text>
-        <Card.Text>APR:</Card.Text>
+        <Card.Text>APR: {apr}%</Card.Text>
         <Card.Text>Staked: {staked} SLP</Card.Text>
         <Card.Text>Earned: {earned} Ponzu</Card.Text>
 
