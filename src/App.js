@@ -1,20 +1,17 @@
-import logo from './logo.svg';
-import { Navbar, Container } from 'react-bootstrap';
+import Home from './Home';
 import './App.css';
+import { Web3Provider } from '@ethersproject/providers';
+import { Web3ReactProvider } from '@web3-react/core';
+
+function getLibrary(provider) {
+  return new Web3Provider(provider)
+}
 
 function App() {
   return (
-    <div className="App">
-      <Navbar>
-        <Container>
-          <Navbar.Brand>PonzuClub</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            Connect Wallet
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Home />
+    </Web3ReactProvider>
   );
 }
 
