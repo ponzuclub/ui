@@ -33,11 +33,11 @@ function Home() {
         </Navbar>
         <Container>
         <Row>
-            <Col xs={1} md={1}>
-            <Image src={logo} rounded />
+            <Col>
+                <Image src={logo} rounded />
             </Col>
             <Col>
-                Welcome to ponzu.club
+                Welcome to ponzu.club! ponzu.club celebrates dipping sauces and smart contracts.
             </Col>
         </Row>
         <Row>
