@@ -1,58 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Container, Row, Col, Image, Card, InputGroup, FormControl } from 'react-bootstrap';
-import { useWeb3React } from '@web3-react/core';
-import { ethers } from 'ethers';
-import { useNyanRewards } from '../hooks';
+import React, { useState, useEffect } from "react";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
+import { useWeb3React } from "@web3-react/core";
+import { ethers } from "ethers";
+import { useNyanRewards } from "../hooks";
 
 function EthCard() {
-  const { active, account, chainId, library, connector, activate } = useWeb3React();
-  const [ethValue, setEthValue] = useState('0');
-  const [staked, setStaked] = useState('0');
-  const [earned, setEarned] = useState('0');
-  const rewards = useNyanRewards("0x245E2775446684F50D22D11A7F4f63502a1B0c8C", library ? true : false);
+  const { active, account, chainId, library, connector, activate } =
+    useWeb3React();
+  const [ethValue, setEthValue] = useState("0");
+  const [staked, setStaked] = useState("0");
+  const [earned, setEarned] = useState("0");
+  const rewards = useNyanRewards(
+    "0x245E2775446684F50D22D11A7F4f63502a1B0c8C",
+    library ? true : false
+  );
 
   useEffect(() => {
     if (library) {
-      library.getBalance(account).then(res => {
+      library.getBalance(account).then((res) => {
         setEthValue(ethers.utils.formatEther(res));
       });
-      rewards.balanceOf(account).then(res => {
+      rewards.balanceOf(account).then((res) => {
         setStaked(ethers.utils.formatEther(res));
       });
-      rewards.earned(account).then(res => {
+      rewards.earned(account).then((res) => {
         setEarned(ethers.utils.formatEther(res));
       });
     }
-  }, [library])
+  }, [library]);
 
   function handleStake() {
-    rewards.stake(0, { value: ethers.utils.parseEther(ethValue) })
-      .then(res => {
+    rewards
+      .stake(0, { value: ethers.utils.parseEther(ethValue) })
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleGetReward() {
-    rewards.getReward()
-      .then(res => {
+    rewards
+      .getReward()
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleExit() {
-    rewards.exit()
-      .then(res => {
+    rewards
+      .exit()
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   if (typeof account !== "string") {
@@ -62,13 +78,14 @@ function EthCard() {
           <Card.Header as="h5">Farm</Card.Header>
           <Card.Body>
             <Card.Title>ETH Pool</Card.Title>
-            <Card.Text>
-              APR:
-            </Card.Text>
+            <Card.Text>APR:</Card.Text>
             <Row>
               <Col>
                 <InputGroup className="mb-3">
-                  <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+                  <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
                   <Button variant="outline-success" id="button-addon2" disabled>
                     Max
                   </Button>
@@ -77,45 +94,40 @@ function EthCard() {
             </Row>
             <Row>
               <Col>
-                <Button variant="primary" disabled>Connect Wallet</Button>
+                <Button variant="primary" disabled>
+                  Connect Wallet
+                </Button>
               </Col>
             </Row>
           </Card.Body>
         </Card>
       </Card>
-    )
-
+    );
   }
   return (
     <Card>
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
         <Card.Title>ETH Pool</Card.Title>
-        <Card.Text>
-          APR:
-        </Card.Text>
-        <Card.Text>
-          Staked: {staked} ETH
-        </Card.Text>
-        <Card.Text>
-          Earned: {earned} Ponzu
-        </Card.Text>
+        <Card.Text>APR:</Card.Text>
+        <Card.Text>Staked: {staked} ETH</Card.Text>
+        <Card.Text>Earned: {earned} Ponzu</Card.Text>
 
         <Row>
           <Col>
             <InputGroup className="mb-3">
-              <FormControl 
+              <FormControl
                 placeholder="ETH Value"
-                aria-label="eth-value" 
+                aria-label="eth-value"
                 value={ethValue}
-                onChange={e => setEthValue(e.target.value)}
+                onChange={(e) => setEthValue(e.target.value)}
               />
-              <Button 
-                variant="outline-success" 
+              <Button
+                variant="outline-success"
                 id="button-addon2"
                 onClick={() => {
-                  if(library) {
-                    library.getBalance(account).then(res => {
+                  if (library) {
+                    library.getBalance(account).then((res) => {
                       setEthValue(ethers.utils.formatEther(res));
                     });
                   }
@@ -128,30 +140,30 @@ function EthCard() {
         </Row>
         <Row>
           <Col>
-            <Button 
+            <Button
               variant="primary"
               onClick={() => {
-                handleStake()
+                handleStake();
               }}
             >
               Stake
             </Button>
           </Col>
           <Col>
-            <Button 
+            <Button
               variant="success"
               onClick={() => {
-                handleGetReward()
+                handleGetReward();
               }}
             >
               Collect Ponzu
             </Button>
           </Col>
           <Col>
-            <Button 
+            <Button
               variant="dark"
               onClick={() => {
-                handleExit()
+                handleExit();
               }}
             >
               Collect Ponzu and GTFO

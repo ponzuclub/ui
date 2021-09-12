@@ -16,7 +16,7 @@ export function useNyanRewards(address, withSigner = false) {
         NyanRewards_ABI,
         withSigner ? library?.getSigner(account).connectUnchecked() : library
       ),
-      [withSigner, library, account]
+    [withSigner, library, account]
   );
 }
 
@@ -29,7 +29,7 @@ export function usePonzu(withSigner = false) {
         PonzuToken_ABI,
         withSigner ? library?.getSigner(account).connectUnchecked() : library
       ),
-      [withSigner, library, account]
+    [withSigner, library, account]
   );
 }
 
@@ -42,7 +42,7 @@ export function useERC20(address, withSigner = false) {
         ERC20_ABI,
         withSigner ? library?.getSigner(account).connectUnchecked() : library
       ),
-      [withSigner, library, account]
+    [withSigner, library, account]
   );
 }
 
@@ -70,7 +70,7 @@ export function addArbitrumRPC(library) {
     if (window.ethereum) {
       let web3 = new Web3Provider(window.ethereum);
       try {
-        window.ethereum.enable().then(function() {
+        window.ethereum.enable().then(function () {
           web3.provider.request({
             jsonrpc: "2.0",
             method: "wallet_addEthereumChain",
@@ -91,10 +91,9 @@ export function addArbitrumRPC(library) {
           });
         });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
-    else {
+    } else {
       alert("You have to install Metamask");
     }
   }

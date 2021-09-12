@@ -1,8 +1,6 @@
-
-import { Container, Row, Col, Card, } from 'react-bootstrap';
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 function Space() {
-
   return (
     <div className="Community">
       <Container>

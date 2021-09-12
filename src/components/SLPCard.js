@@ -1,75 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Container, Row, Col, Image, Card, InputGroup, FormControl } from 'react-bootstrap';
-import { useWeb3React } from '@web3-react/core';
-import { ethers } from 'ethers';
-import { useERC20, usePonzu, useNyanRewards } from '../hooks';
+import React, { useState, useEffect } from "react";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
+import { useWeb3React } from "@web3-react/core";
+import { ethers } from "ethers";
+import { useERC20, usePonzu, useNyanRewards } from "../hooks";
 
 function SLPCard(props) {
-  const {
-    title,
-    slpTokenAddress,
-    poolAddress,
-  } = props;
-  const { active, account, chainId, library, connector, activate } = useWeb3React();
-  const [slpValue, setSlpValue] = useState('0');
-  const [staked, setStaked] = useState('0');
-  const [earned, setEarned] = useState('0');
+  const { title, slpTokenAddress, poolAddress } = props;
+  const { active, account, chainId, library, connector, activate } =
+    useWeb3React();
+  const [slpValue, setSlpValue] = useState("0");
+  const [staked, setStaked] = useState("0");
+  const [earned, setEarned] = useState("0");
   const slp = useERC20(slpTokenAddress, library ? true : false);
   const ponzu = usePonzu(library ? true : false);
   const rewards = useNyanRewards(poolAddress, library ? true : false);
 
   useEffect(() => {
     if (library) {
-      slp.balanceOf(account).then(res => {
+      slp.balanceOf(account).then((res) => {
         setSlpValue(ethers.utils.formatEther(res));
       });
-      rewards.balanceOf(account).then(res => {
+      rewards.balanceOf(account).then((res) => {
         setStaked(ethers.utils.formatEther(res));
       });
-      rewards.earned(account).then(res => {
+      rewards.earned(account).then((res) => {
         setEarned(ethers.utils.formatEther(res));
       });
     }
-  }, [library])
+  }, [library]);
 
   function handleApprove() {
-    slp.approve(poolAddress, ethers.utils.parseEther("100000000"))
-      .then(res => {
+    slp
+      .approve(poolAddress, ethers.utils.parseEther("100000000"))
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleStake() {
-    rewards.stake(ethers.utils.parseEther(slpValue))
-      .then(res => {
+    rewards
+      .stake(ethers.utils.parseEther(slpValue))
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleGetReward() {
-    rewards.getReward()
-      .then(res => {
+    rewards
+      .getReward()
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleExit() {
-    rewards.exit()
-      .then(res => {
+    rewards
+      .exit()
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   if (typeof account !== "string") {
@@ -79,13 +89,14 @@ function SLPCard(props) {
           <Card.Header as="h5">Farm</Card.Header>
           <Card.Body>
             <Card.Title>{title}</Card.Title>
-            <Card.Text>
-              APR:
-            </Card.Text>
+            <Card.Text>APR:</Card.Text>
             <Row>
               <Col>
                 <InputGroup className="mb-3">
-                  <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+                  <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
                   <Button variant="outline-success" id="button-addon2" disabled>
                     Max
                   </Button>
@@ -94,45 +105,40 @@ function SLPCard(props) {
             </Row>
             <Row>
               <Col>
-                <Button variant="primary" disabled>Connect Wallet</Button>
+                <Button variant="primary" disabled>
+                  Connect Wallet
+                </Button>
               </Col>
             </Row>
           </Card.Body>
         </Card>
       </Card>
-    )
-
+    );
   }
   return (
     <Card>
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Text>
-          APR:
-        </Card.Text>
-        <Card.Text>
-          Staked: {staked} SLP
-        </Card.Text>
-        <Card.Text>
-          Earned: {earned} Ponzu
-        </Card.Text>
+        <Card.Text>APR:</Card.Text>
+        <Card.Text>Staked: {staked} SLP</Card.Text>
+        <Card.Text>Earned: {earned} Ponzu</Card.Text>
 
         <Row>
           <Col>
             <InputGroup className="mb-3">
-              <FormControl 
+              <FormControl
                 placeholder="SLP Value"
-                aria-label="slp-value" 
+                aria-label="slp-value"
                 value={slpValue}
-                onChange={e => setSlpValue(e.target.value)}
+                onChange={(e) => setSlpValue(e.target.value)}
               />
-              <Button 
-                variant="outline-success" 
+              <Button
+                variant="outline-success"
                 id="button-addon2"
                 onClick={() => {
-                  if(library) {
-                    slp.balanceOf(account).then(res => {
+                  if (library) {
+                    slp.balanceOf(account).then((res) => {
                       setSlpValue(ethers.utils.formatEther(res));
                     });
                   }
@@ -145,40 +151,40 @@ function SLPCard(props) {
         </Row>
         <Row>
           <Col>
-            <Button 
+            <Button
               variant="warning"
               onClick={() => {
-                handleApprove()
+                handleApprove();
               }}
             >
               Approve
             </Button>
           </Col>
           <Col>
-            <Button 
+            <Button
               variant="primary"
               onClick={() => {
-                handleStake()
+                handleStake();
               }}
             >
               Stake
             </Button>
           </Col>
           <Col>
-            <Button 
+            <Button
               variant="success"
               onClick={() => {
-                handleGetReward()
+                handleGetReward();
               }}
             >
               Collect Ponzu
             </Button>
           </Col>
           <Col>
-            <Button 
+            <Button
               variant="dark"
               onClick={() => {
-                handleExit()
+                handleExit();
               }}
             >
               Collect Ponzu and GTFO

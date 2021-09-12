@@ -1,22 +1,17 @@
-import './App.css';
-import { Web3Provider } from '@ethersproject/providers';
-import { Web3ReactProvider } from '@web3-react/core';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
+import "./App.css";
+import { Web3Provider } from "@ethersproject/providers";
+import { Web3ReactProvider } from "@web3-react/core";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Home from './pages/Home';
-import Community from './pages/Community';
-import About from './pages/About';
-import Governance from './pages/Governance';
-import Space from './pages/Space';
-import NavBar from './components/NavBar';
+import Home from "./pages/Home";
+import Community from "./pages/Community";
+import About from "./pages/About";
+import Governance from "./pages/Governance";
+import Space from "./pages/Space";
+import NavBar from "./components/NavBar";
 
 function getLibrary(provider) {
-  return new Web3Provider(provider)
+  return new Web3Provider(provider);
 }
 
 function App() {

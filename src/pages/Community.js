@@ -1,8 +1,15 @@
-
-import { Button, Container, Row, Col, Image, Card, InputGroup, FormControl } from 'react-bootstrap';
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
 function Community() {
-
   return (
     <div className="Community">
       <Container>
@@ -13,10 +20,16 @@ function Community() {
               <Card.Body>
                 <Card.Title>Links</Card.Title>
                 <Card.Text>
-                  Discord: <a href="https://discord.gg/Byw8cp2RJv">https://discord.gg/Byw8cp2RJv</a>
+                  Discord:{" "}
+                  <a href="https://discord.gg/Byw8cp2RJv">
+                    https://discord.gg/Byw8cp2RJv
+                  </a>
                 </Card.Text>
                 <Card.Text>
-                  Twitter: <a href="https://twitter.com/arbiponzuclub">https://twitter.com/arbiponzuclub</a>
+                  Twitter:{" "}
+                  <a href="https://twitter.com/arbiponzuclub">
+                    https://twitter.com/arbiponzuclub
+                  </a>
                 </Card.Text>
               </Card.Body>
             </Card>

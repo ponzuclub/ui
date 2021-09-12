@@ -1,8 +1,15 @@
-
-import { Button, Container, Row, Col, Image, Card, InputGroup, FormControl } from 'react-bootstrap';
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
 function Governance() {
-
   return (
     <div className="Community">
       <Container>
