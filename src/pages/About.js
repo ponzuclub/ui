@@ -120,7 +120,7 @@ function About() {
                 <Card.Text>
                   7% reserved for dev and early contributors (700,000)
                 </Card.Text>
-                <Card.Text>4% in ETH pool, for 1 week (400,000)</Card.Text>
+                <Card.Text>4% in ETH pool, for 2 months (400,000)</Card.Text>
                 <Card.Text>8% in PONZU pool, for 2 months (800,000)</Card.Text>
                 <Card.Text>
                   13% in PONZU/ETH pool, for 2 months (1,300,000)
