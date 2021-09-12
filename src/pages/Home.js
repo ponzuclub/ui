@@ -5,6 +5,7 @@ import { injected } from '../connectors';
 import { addArbitrumRPC } from '../hooks';
 import EthCard from '../components/EthCard';
 import PonzuCard from '../components/PonzuCard';
+import SLPCard from '../components/SLPCard';
 
 function Home() {
   const { active, account, chainId, library, connector, activate } = useWeb3React()
@@ -44,40 +45,11 @@ function Home() {
         </Row>
         <Row>
           <Col>
-            <Card>
-              <Card.Header as="h5">Farm</Card.Header>
-              <Card.Body>
-                <Card.Title>PONZU-ETH LP Pool</Card.Title>
-                <Card.Text>
-                  <a 
-                    href="https://app.sushi.com/add/ETH/0x7d2D35cF256cb47b8cAa6eB4d793f1c7e2228d35" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    GET PONZU-ETH LP Tokens
-                  </a>
-                </Card.Text>
-                <Card.Text>
-                  APR:
-                </Card.Text>
-                <Row>
-                  <Col>
-                    <Button variant="warning">Approve</Button>
-                  </Col>
-                  <Col>
-                    <Button variant="primary">Stake</Button>
-                  </Col>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <Button variant="success">Max</Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <SLPCard 
+              title="PONZU-ETH LP Pool"
+              slpTokenAddress="0x7ca483a96078fa311333515a64db1ca8e88af455"
+              poolAddress="0x01B5e2A392Da78C8D42644272C4b7Adbfb84230B"
+            />
           </Col>
         </Row>
         <Row>

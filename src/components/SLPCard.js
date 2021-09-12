@@ -2,20 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col, Image, Card, InputGroup, FormControl } from 'react-bootstrap';
 import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
-import { usePonzu, useNyanRewards } from '../hooks';
+import { useERC20, usePonzu, useNyanRewards } from '../hooks';
 
-function PonzuCard() {
+function SLPCard(props) {
+  const {
+    title,
+    slpTokenAddress,
+    poolAddress,
+  } = props;
   const { active, account, chainId, library, connector, activate } = useWeb3React();
-  const [ponzuValue, setPonzuValue] = useState('0');
+  const [slpValue, setSlpValue] = useState('0');
   const [staked, setStaked] = useState('0');
   const [earned, setEarned] = useState('0');
+  const slp = useERC20(slpTokenAddress, library ? true : false);
   const ponzu = usePonzu(library ? true : false);
-  const rewards = useNyanRewards("0xF6a37745FC911666132E8b8F29fC9c4F5C4a703D", library ? true : false);
+  const rewards = useNyanRewards(poolAddress, library ? true : false);
 
   useEffect(() => {
     if (library) {
-      ponzu.balanceOf(account).then(res => {
-        setPonzuValue(ethers.utils.formatEther(res));
+      slp.balanceOf(account).then(res => {
+        setSlpValue(ethers.utils.formatEther(res));
       });
       rewards.balanceOf(account).then(res => {
         setStaked(ethers.utils.formatEther(res));
@@ -27,7 +33,7 @@ function PonzuCard() {
   }, [library])
 
   function handleApprove() {
-    ponzu.approve("0xF6a37745FC911666132E8b8F29fC9c4F5C4a703D", ethers.utils.parseEther("10000000"))
+    slp.approve(poolAddress, ethers.utils.parseEther("100000000"))
       .then(res => {
         console.log(res);
       })
@@ -37,7 +43,7 @@ function PonzuCard() {
   }
 
   function handleStake() {
-    rewards.stake(ethers.utils.parseEther(ponzuValue))
+    rewards.stake(ethers.utils.parseEther(slpValue))
       .then(res => {
         console.log(res);
       })
@@ -72,7 +78,7 @@ function PonzuCard() {
         <Card>
           <Card.Header as="h5">Farm</Card.Header>
           <Card.Body>
-            <Card.Title>Ponzu Pool</Card.Title>
+            <Card.Title>{title}</Card.Title>
             <Card.Text>
               APR:
             </Card.Text>
@@ -101,12 +107,12 @@ function PonzuCard() {
     <Card>
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
-        <Card.Title>Ponzu Pool</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>
           APR:
         </Card.Text>
         <Card.Text>
-          Staked: {staked} Ponzu
+          Staked: {staked} SLP
         </Card.Text>
         <Card.Text>
           Earned: {earned} Ponzu
@@ -116,18 +122,18 @@ function PonzuCard() {
           <Col>
             <InputGroup className="mb-3">
               <FormControl 
-                placeholder="Ponzu Value"
-                aria-label="ponzu-value" 
-                value={ponzuValue}
-                onChange={e => setPonzuValue(e.target.value)}
+                placeholder="SLP Value"
+                aria-label="slp-value" 
+                value={slpValue}
+                onChange={e => setSlpValue(e.target.value)}
               />
               <Button 
                 variant="outline-success" 
                 id="button-addon2"
                 onClick={() => {
                   if(library) {
-                    ponzu.balanceOf(account).then(res => {
-                      setPonzuValue(ethers.utils.formatEther(res));
+                    slp.balanceOf(account).then(res => {
+                      setSlpValue(ethers.utils.formatEther(res));
                     });
                   }
                 }}
@@ -184,4 +190,4 @@ function PonzuCard() {
   );
 }
 
-export default PonzuCard;
+export default SLPCard;
