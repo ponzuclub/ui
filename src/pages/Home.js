@@ -54,76 +54,20 @@ function Home() {
         </Row>
         <Row>
           <Col>
-            <Card>
-              <Card.Header as="h5">Farm</Card.Header>
-              <Card.Body>
-                <Card.Title>PONZU-NYAN LP Pool</Card.Title>
-                <Card.Text>
-                  <a 
-                    href="https://app.sushi.com/add/0x7d2D35cF256cb47b8cAa6eB4d793f1c7e2228d35/0xeD3fB761414DA74b74F33e5c5a1f78104b188DfC"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GET PONZU-NYAN LP Tokens 
-                  </a>
-                </Card.Text>
-                <Card.Text>
-                  APR:
-                </Card.Text>
-                <Row>
-                  <Col>
-                    <Button variant="warning">Approve</Button>
-                  </Col>
-                  <Col>
-                    <Button variant="primary">Stake</Button>
-                  </Col>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <Button variant="success">Max</Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <SLPCard 
+              title="PONZU-NYAN LP Pool"
+              slpTokenAddress="0xc368c51ad7dc69ab6f7cdc5a498d18d15edaf325"
+              poolAddress="0xd0d65a2250fc427a1021E938B39Ba73B3d7e5CC2"
+            />
           </Col>
         </Row>
         <Row>
           <Col>
-            <Card>
-              <Card.Header as="h5">Farm</Card.Header>
-              <Card.Body>
-                <Card.Title>PONZU-CARBON LP Pool</Card.Title>
-                  <a 
-                    href="https://app.sushi.com/add/0x7d2D35cF256cb47b8cAa6eB4d793f1c7e2228d35/0xfa42DA1bd08341537a44a4ca9D236D1c00A98b40" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    GET PONZU-ETH LP Tokens
-                  </a>
-                <Card.Text>
-                  APR:
-                </Card.Text>
-                <Row>
-                  <Col>
-                    <Button variant="warning">Approve</Button>
-                  </Col>
-                  <Col>
-                    <Button variant="primary">Stake</Button>
-                  </Col>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <Button variant="success">Max</Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <SLPCard 
+              title="PONZU-CARBON LP Pool"
+              slpTokenAddress="0x57e5c019462a838ca7ee721389ad0f905393db18"
+              poolAddress="0x516BEB71135EaE2AE0D627DfB05eEf93E637d3EB"
+            />
           </Col>
         </Row>
       </Container>
