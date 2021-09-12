@@ -14,7 +14,7 @@ import { ethers } from "ethers";
 import { useERC20, usePonzu, useNyanRewards } from "../hooks";
 
 function SLPCard(props) {
-  const { title, slpTokenAddress, poolAddress } = props;
+  const { title, slpTokenAddress, poolAddress, link, linkText } = props;
   const { active, account, chainId, library, connector, activate } =
     useWeb3React();
   const [slpValue, setSlpValue] = useState("0");
@@ -89,6 +89,7 @@ function SLPCard(props) {
           <Card.Header as="h5">Farm</Card.Header>
           <Card.Body>
             <Card.Title>{title}</Card.Title>
+            <Card.Text><a href={link}>{linkText}</a></Card.Text>
             <Card.Text>APR:</Card.Text>
             <Row>
               <Col>
@@ -120,6 +121,7 @@ function SLPCard(props) {
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
+        <Card.Text><a href={link}>{linkText}</a></Card.Text>
         <Card.Text>APR:</Card.Text>
         <Card.Text>Staked: {staked} SLP</Card.Text>
         <Card.Text>Earned: {earned} Ponzu</Card.Text>
