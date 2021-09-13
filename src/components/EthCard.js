@@ -19,6 +19,7 @@ function EthCard() {
   const [ethValue, setEthValue] = useState("0");
   const [staked, setStaked] = useState("0");
   const [earned, setEarned] = useState("0");
+  const [apr, setApr] = useState(0);
   const rewards = useNyanRewards(
     "0x245E2775446684F50D22D11A7F4f63502a1B0c8C",
     library ? true : false
@@ -34,6 +35,11 @@ function EthCard() {
       });
       rewards.earned(account).then((res) => {
         setEarned(ethers.utils.formatEther(res));
+      });
+      rewards.rewardRate().then((rewardRate) => {
+        rewards.totalSupply().then((totalSupply) => {
+          setApr(100*parseFloat(ethers.utils.formatEther(rewardRate)) * 31557600 / parseFloat(ethers.utils.formatEther(totalSupply)));
+        });
       });
     }
   }, [library]);
@@ -109,7 +115,7 @@ function EthCard() {
       <Card.Header as="h5">Farm</Card.Header>
       <Card.Body>
         <Card.Title>ETH Pool</Card.Title>
-        <Card.Text>APR:</Card.Text>
+        <Card.Text>APR: {apr}%</Card.Text>
         <Card.Text>Staked: {staked} ETH</Card.Text>
         <Card.Text>Earned: {earned} Ponzu</Card.Text>
 
