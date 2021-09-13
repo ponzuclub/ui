@@ -45,6 +45,7 @@ function Home() {
           </Col>
           <Col>
             <Button 
+              target="_blank"
               href="https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0x7d2d35cf256cb47b8caa6eb4d793f1c7e2228d35"
               variant="link">Buy PONZU</Button>
           </Col>
