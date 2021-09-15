@@ -42,7 +42,7 @@ function NavBar() {
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/community">Community</Nav.Link>
             <Nav.Link href="/governance">Governance</Nav.Link>
-            <Nav.Link href="/space">Space</Nav.Link>
+            <Nav.Link href="https://ponzu.space">Space</Nav.Link>
           </Nav>
           {chainId !== 42161 ? (
             <Button variant="secondary" onClick={handleSwitchNetwork(library)}>
